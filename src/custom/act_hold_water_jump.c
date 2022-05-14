@@ -11,6 +11,14 @@ s32 act_hold_water_jump_jam(struct MarioState *m) {
         // the water cam is awful for this, just use the normal one instead
         set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
     }
+    //similar to the above check, but doesnt set yvel
+    if (m->actionArg == 40) {
+        m->forwardVel *= construct_float(1.6f);
+        m->actionArg = 0;
+        m->actionState = 4;
+        set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
+    }
+
     m->actionTimer += 1;
 
     const float fifteen = construct_float(15.0f);
