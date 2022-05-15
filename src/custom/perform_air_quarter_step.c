@@ -46,6 +46,7 @@ s32 perform_air_quarter_step_jam(struct MarioState *m, Vec3f intendedPos, u32 st
             }
 
             m->usedObj = spawn_object(m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShellUnderwater);
+            m->usedObj->oFlags |= OBJ_FLAG_HOLDABLE;
             mario_grab_used_object(m);
             m->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
             set_mario_action(m, ACT_WATER_SHELL_SWIMMING, (u32)(s32)m->forwardVel);

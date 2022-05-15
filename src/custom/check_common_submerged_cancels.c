@@ -35,7 +35,10 @@ s32 check_common_submerged_cancels_jam(struct MarioState *m) {
             }
             else {
                 //exit the water in a generic air shell state
-                m->heldObj = NULL;
+                if (m->heldObj != NULL) {
+                    obj_mark_for_deletion(m->heldObj);
+                    m->heldObj = NULL;
+                }
                 set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
                 return set_mario_action(m, ACT_RIDING_SHELL_JUMP, m->actionTimer);
             }

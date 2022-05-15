@@ -55,8 +55,11 @@ s32 act_hold_water_jump_jam(struct MarioState *m) {
             m->marioObj->header.gfx.angle[2] = 0;
         }
         else {
-            m->heldObj = NULL;
-                set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
+            if (m->heldObj != NULL) {
+                obj_mark_for_deletion(m->heldObj);
+                m->heldObj = NULL;
+            }
+            set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
             return set_mario_action(m, ACT_RIDING_SHELL_JUMP, m->actionTimer);
         }
     }
@@ -67,7 +70,10 @@ s32 act_hold_water_jump_jam(struct MarioState *m) {
             // underwater. still, better safe than sorry
             if (m->actionState == 4 || m->actionState == 6) {
                 set_mario_action(m, ACT_RIDING_SHELL_GROUND, m->actionState);
-                m->heldObj = NULL;
+                if (m->heldObj != NULL) {
+                    obj_mark_for_deletion(m->heldObj);
+                    m->heldObj = NULL;
+                }
 
                 set_camera_mode(m->area->camera, m->area->camera->defMode, 1);
             } else {

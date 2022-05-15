@@ -83,6 +83,7 @@ s32 act_riding_shell_ground_jam(struct MarioState *m) {
             m->riddenObj = NULL;
         }
         m->usedObj = spawn_object(m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShellUnderwater);
+        m->usedObj->oFlags |= OBJ_FLAG_HOLDABLE;
         mario_grab_used_object(m);
         m->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
         m->pos[1] -= construct_float(50.0f);

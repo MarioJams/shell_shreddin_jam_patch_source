@@ -10,6 +10,7 @@ s32 act_water_shell_swimming_jam(struct MarioState *m) {
 
     if (!m->heldObj) {
         m->usedObj = spawn_object(m->marioObj, MODEL_KOOPA_SHELL, bhvKoopaShellUnderwater);
+        m->usedObj->oFlags |= OBJ_FLAG_HOLDABLE;
         mario_grab_used_object(m);
         m->marioBodyState->grabPos = GRAB_POS_LIGHT_OBJ;
     }
